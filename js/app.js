@@ -5,19 +5,20 @@ $(document).ready(function() {
     var bestScore = 9999;
     var UIFadeTime = 500;
     resetGame();
-    
-  //   $('.productHeadline').hide();
-  //   $('.productArrow').hide();
-
-  //   // Set day of week
-  //   var day = dayOfWeek();
-  //   $('.headerHappyDay').text("Happy " + day + ".");
-
-
+   
     // Bind button to click event
     $("#guessButton").click(guess);
     $("#resetButton").click(resetGame);
     $(".bestScorePkg").hide();
+
+    $("#guessBox").keypress(function (e) {
+     var key = e.which;
+     if(key == 13)  // the enter key code
+      {
+        $("#guessButton").click();
+        return false;  
+      }
+    });  
 
     function guess() {
         var num = $("input[name='guess']").val();	
@@ -25,8 +26,11 @@ $(document).ready(function() {
             guesses.push(num);
             if(num == theNumber) 
                 endGame();
-            else
+            else {
                 updateScoreboard();
+                updateInstruction();
+            }
+            $("#guessBox").val('');
         }
     }
 
@@ -34,15 +38,19 @@ $(document).ready(function() {
         $(".currentScore").text(guesses.length);
         $(".lastGuess").text(lastGuess());
         updateHeatLevel();
-        updateInstruction();
     }
 
     function endGame() {
         //Disable further guessing
         //Show final score
         //
-        updateHeatLevel();
-        $(".currentScore").text(guesses.length);
+        updateScoreboard();
+
+        if(guesses.length === 1)
+        {
+            $(".instruct").text("You win!  On your first guess!?!");
+            $(".message").text("Go buy a lottery ticket!" );
+        }
         $(".instruct").text("You win!  You took " + guesses.length + " guesses.");
         $(".message").text("Can you do it in " + (guesses.length-1) + "?" );
 
@@ -51,9 +59,7 @@ $(document).ready(function() {
             $(".bestScore").text(guesses.length);
             $(".bestScorePkg").fadeIn(UIFadeTime);
         }
-        $("#guessButton, .guessBox, .lastGuessPkg").fadeOut(UIFadeTime);
-
-
+        $("#guessButton, .guess").fadeOut(UIFadeTime);
     }
 
     function resetGame() {
@@ -62,10 +68,11 @@ $(document).ready(function() {
        $(".currentScore").text("0");
        $(".temp").text("Ice Cold");
        $(".instruct").text("I'm thinking of a number between 1 and 100.");
-       $(".message").text("What is your guess?");
+       $(".message").text("Take your best shot!");
+       $(".lastGuess").text(" - ");
        $(".viewport").animate({backgroundColor: jQuery.Color("rgb(0,0,255)")}, 1000);
        $(".temp").animate({color: jQuery.Color("rgb(0,0,255)")}, 1000);
-       $("#guessButton, .guessBox, .lastGuessPkg").fadeIn(UIFadeTime);
+       $("#guessButton, .guess").fadeIn(UIFadeTime);
     }
 
     function updateHeatLevel() { 
