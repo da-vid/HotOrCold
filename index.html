@@ -1,0 +1,56 @@
+<!doctype html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Hot or Cold</title>
+		<link rel="stylesheet" type="text/css" href="css/reset.css">
+		<link href='http://fonts.googleapis.com/css?family=Londrina+Sketch|VT323|Averia+Libre|Oswald|Roboto' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script type='text/javascript' src='js/jquery.color-2.1.2.min.js'></script>
+		<script type='text/javascript' src='js/app.js'></script>
+	</head>
+	<body>
+		<div class="viewport">
+			<div class="main">
+				<div class="title">
+					Hot or Cold
+				</div>
+				<div class="instruct">
+					I'm thinking of a number between 1 and 100.  Take a guess.
+				</div>
+				<div class="guessBox">
+					<input type="tel"  name="guess">
+				</div>
+				<div class="message">
+					Take a guess.
+				</div>
+				<div class="buttons">
+					<div class="fauxButton" id="guessButton">Guess!</div>
+					<div class="fauxButton" id="resetButton">Start Over</div>
+				</div>	<br />
+				<div class="lastGuessPkg package">
+					<div class="lastGuess score">23</div>
+					<div class="lastGuessLbl label">Last Guess</div>
+				</div> <br />
+				<div class="tempPkg package">
+					<div class="temp score">Ice Cold</div>
+					<div class="tempLbl label">Heat Level</div>
+				</div> <br />
+				<div class="currentScorePkg package">
+				<div class="currentScore score">23</div>
+				<div class="currentScoreLbl label">Guesses</div>
+				</div> <br />
+				<div class="bestScorePkg package">				
+				<div class="bestScore score">-</div>
+				<div class="bestScoreLbl label">Best Score</div>
+				</div>				
+			</div>
+			<footer>
+			<a href="http://www.davidwong.net">David Wong</a> for <a href="http://www.thinkful.com">Thinkful FEWD</a>.
+			</footer>
+		</div>
+
+	</body>
+</html>

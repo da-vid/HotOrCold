@@ -1,0 +1,113 @@
+/****** General ******/
+
+html, body {
+	height: 100%;
+	/*min-width: 980px;*/
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+	font-family: inherit;
+	font-size: inherit;
+}
+
+.centerDiv
+{
+	/*
+	http://stackoverflow.com/questions/114543/how-to-center-a-div-in-a-div-horizontally
+	*/
+
+    display:-moz-box;
+    -moz-box-pack:center;
+    -moz-box-align:center;
+
+    display:-webkit-box;
+    -webkit-box-pack:center;
+    -webkit-box-align:center;
+
+    display:box;
+    box-pack:center;
+    box-align:center;
+
+}
+
+.viewport {
+	min-height: 100%;
+	width: 100%;
+	position: relative;
+	background-color: black;
+}
+
+/****** Header ******/
+
+/****** Body ******/
+.main {
+	clear: both;
+	text-align: center;
+	border: 1px solid #cccccc;
+	border-radius: 5px;
+	border-color: black;
+	width: 30em;
+	max-height: 30em;
+	overflow: auto;
+	margin: auto;
+	position: fixed;
+	top: 0; left: 0; bottom: 0; right: 0;
+	background-color: white;
+}
+
+.title {
+	padding: 20px 0 20px 0;
+}
+
+.buttons{
+	position: relative;
+	margin: auto;
+
+}
+
+.buttons div{
+	width: 10em;
+	margin: auto;
+	margin-top: .5em;
+}
+
+.fauxButton{
+	border: 1px solid #4285f4;
+	background-color: #4285f4;
+	padding: 7px 12px 7px 12px;
+	color: white; 
+	text-decoration: none;
+	border-radius: 2px;
+	font-weight: bold;
+}
+
+.fauxButton:active{
+	text-decoration: none;
+	background-color: #3275e4
+}
+
+.fauxButton:hover{
+	text-decoration: none;
+	cursor: default;
+	box-shadow: 0px 1px 0px #aaaaaa;
+}
+
+
+/****** Footer ******/
+footer {	
+	padding: 0.3em 0 0.3em 0;
+	color: #fff;
+	background-color: #333;
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	text-align: center;
+	font-family: VT323, sans-serif;
+	font-size: medium;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+}
