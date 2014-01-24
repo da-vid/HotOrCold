@@ -61,8 +61,8 @@ $(document).ready(function() {
        guesses.length = 0; //clear the guesses array
        $(".currentScore").text("0");
        $(".temp").text("Ice Cold");
-       $(".instruct").text("I'm thinking of a number between 1 and 100.  Take a guess.");
-       $(".message").text("");
+       $(".instruct").text("I'm thinking of a number between 1 and 100.");
+       $(".message").text("What is your guess?");
        $(".viewport").animate({backgroundColor: jQuery.Color("rgb(0,0,255)")}, 1000);
        $(".temp").animate({color: jQuery.Color("rgb(0,0,255)")}, 1000);
        $("#guessButton, .guessBox, .lastGuessPkg").fadeIn(UIFadeTime);
@@ -109,8 +109,7 @@ $(document).ready(function() {
         else if (diff > 30) {
             blueness = 255 ;
         }
-        else 
-        {
+        else {
             blueness = Math.floor(((diff - 10) * 255) / 20);
         }
         //https://github.com/jquery/jquery-color
@@ -122,11 +121,13 @@ $(document).ready(function() {
 
     function updateInstruction() {
         if (currentDiff() > lastDiff())
-            $(".instruct").text("You are getting colder.  Guess again.");
+            $(".instruct").text("You are getting colder.");
         else if (currentDiff() < lastDiff())
-            $(".instruct").text("You are getting warmer.  Guess again.");
+            $(".instruct").text("You are getting warmer.");
         else
-            $(".instruct").text("Nope.  Guess again.");
+            $(".instruct").text("Nope.");
+
+        $(".message").text("Guess again.");
     }
 
     function validGuess(num) {

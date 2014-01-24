@@ -48,7 +48,8 @@ a {
 	border: 1px solid #cccccc;
 	border-radius: 5px;
 	border-color: black;
-	width: 30em;
+	width: 80%;
+	max-width: 480px;
 	max-height: 30em;
 	overflow: auto;
 	margin: auto;
@@ -59,6 +60,44 @@ a {
 
 .title {
 	padding: 20px 0 20px 0;
+	font-family: Trade Winds, sans-serif;
+	font-size: xx-large;	
+}
+
+.hot {
+	color: #A33;
+	font-family: inherit;
+	font-size: inherit;
+	text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;  
+}
+
+.cold {
+	color: #0AD;
+	font-family: inherit;
+	font-size: inherit;
+	text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;  
+}
+
+.or {
+	color: #666;
+	font-family: inherit;
+	font-size: large;
+	vertical-align: middle;
+}
+
+.instruct {
+	width: 80%;
+	margin: auto;
+	font-family: Roboto, sans-serif;
+	font-size: medium;	
 }
 
 .buttons{
@@ -73,25 +112,35 @@ a {
 	margin-top: .5em;
 }
 
+#guessButton {
+	font-family: Trade Winds, sans-serif;
+	font-size: x-large;	
+	background-color: #833;
+}
+
+#resetButton {
+	font-family: Roboto, sans-serif;
+	font-size: small;
+	font-weight: normal;	
+}
+
+
 .fauxButton{
-	border: 1px solid #4285f4;
-	background-color: #4285f4;
+	border: 2px solid #333;
+	background-color: #333;
 	padding: 7px 12px 7px 12px;
 	color: white; 
 	text-decoration: none;
-	border-radius: 2px;
-	font-weight: bold;
+	border-radius: 10px;
 }
 
 .fauxButton:active{
-	text-decoration: none;
-	background-color: #3275e4
+	background-color: #000;
 }
 
 .fauxButton:hover{
-	text-decoration: none;
 	cursor: default;
-	box-shadow: 0px 1px 0px #aaaaaa;
+	box-shadow: 0 3px 0 #aaaaaa;
 }
 
 
