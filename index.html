@@ -3,7 +3,8 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=450">
+		<!-- <meta name="viewport" content="width=425px"> -->
+		<meta name="viewport" content="width=device-width">
 		<title>Hot or Cold</title>
 		<link rel="stylesheet" type="text/css" href="css/reset.css">
 		<link href='http://fonts.googleapis.com/css?family=Trade+Winds|Londrina+Sketch|VT323|Averia+Libre|Oswald|Roboto' rel='stylesheet' type='text/css'>
@@ -19,7 +20,9 @@
 					<span class="hot">Hot</span> <span class="or">or</span> <span class="cold">Cold</span>
 				</div>
 				<div class="instruct">
-					I'm thinking of a number between 1 and 100.  
+					<div class="vCenterText instructText">
+						I'm thinking of a number between 1 and 100.  
+					</div>
 				</div>
 				<div class="guess">
 					<input type="number"  name="guess" id="guessBox" placeholder="??" maxlength="3">
@@ -27,31 +30,40 @@
 				<div class="message">
 					What is your guess?
 				</div>
-				<div class="fauxButton" id="guessButton">Guess!</div>
-				<div class="fauxButton" id="resetButton">Start Over</div>
+				<div class="fauxButton" id="guessButton">Guess!</div>				
 				<div class="scoreboard centerDiv">
 					<div class="lastGuessPkg package">
 						<div class="lastGuess score">23</div>
-						<div class="lastGuessLbl label">Last Guess</div>
+						<div class="centerDiv">
+							<div class="lastGuessLbl label">Last Guess</div>
+						</div>
 					</div> 
 					<div class="tempPkg package">
 						<div class="temp score">Ice Cold</div>
-						<div class="tempLbl label">Heat Level</div>
+						<div class="centerDiv">
+							<div class="tempLbl label">Heat Level</div>
+						</div>
 					</div> 
 					<div class="currentScorePkg package">
 						<div class="currentScore score">23</div>
-						<div class="currentScoreLbl label">Guesses</div>
+						<div class="centerDiv">
+							<div class="currentScoreLbl label">Guesses</div>
+						</div>
 					</div> 
 					<div class="bestScorePkg package">				
 						<div class="bestScore score">-</div>
-						<div class="bestScoreLbl label">Best Score</div>
+						<div class="centerDiv">
+							<div class="bestScoreLbl label">Best Score</div>
+						</div>
 					</div>	
 				</div>
+				<div class="fauxButton" id="resetButton">Start Over</div>
 
-				<footer>
-					<a href="http://www.davidwong.net">David Wong</a> for <a href="http://www.thinkful.com">Thinkful FEWD</a>.
-				</footer>			
+	
 			</div>
+			<footer>
+				<a href="http://www.davidwong.net">David Wong</a> for <a href="http://www.thinkful.com">Thinkful FEWD</a>.
+			</footer>		
 
 		</div>
 

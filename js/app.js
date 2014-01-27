@@ -3,7 +3,7 @@ $(document).ready(function() {
 	var guesses = [];
     var theNumber;
     var bestScore = 9999;
-    var UIFadeTime = 500;
+    var UIFadeTime = 1000;
     resetGame();
    
     // Bind button to click event
@@ -41,38 +41,47 @@ $(document).ready(function() {
     }
 
     function endGame() {
-        //Disable further guessing
-        //Show final score
-        //
         updateScoreboard();
-
         if(guesses.length === 1)
         {
-            $(".instruct").text("You win!  On your first guess!?!");
+            $(".instructText").text("You win!  On your first guess!?!");
             $(".message").text("Go buy a lottery ticket!" );
         }
-        $(".instruct").text("You win!  You took " + guesses.length + " guesses.");
+        $(".instructText").text("You win!  You took " + guesses.length + " guesses.");
         $(".message").text("Can you do it in " + (guesses.length-1) + "?" );
 
+        // Update best score
         if (guesses.length < bestScore) { 
             bestScore = guesses.length;           
             $(".bestScore").text(guesses.length);
             $(".bestScorePkg").fadeIn(UIFadeTime);
         }
+
+        // Hide guess elements
         $("#guessButton, .guess").fadeOut(UIFadeTime);
     }
 
     function resetGame() {
-       theNumber = Math.floor((Math.random()*100)+1);
-       guesses.length = 0; //clear the guesses array
-       $(".currentScore").text("0");
-       $(".temp").text("Ice Cold");
-       $(".instruct").text("I'm thinking of a number between 1 and 100.");
-       $(".message").text("Take your best shot!");
-       $(".lastGuess").text(" - ");
-       $(".viewport").animate({backgroundColor: jQuery.Color("rgb(0,0,255)")}, 1000);
-       $(".temp").animate({color: jQuery.Color("rgb(0,0,255)")}, 1000);
-       $("#guessButton, .guess").fadeIn(UIFadeTime);
+
+        // Reset the secret number
+        theNumber = Math.floor((Math.random()*100)+1);
+
+        // Clear the guesses array
+        guesses.length = 0; 
+
+        // Reset all text boxes
+        $(".currentScore").text("0");
+        $(".temp").text("Ice Cold");
+        $(".instructText").text("I'm thinking of a number between 1 and 100.");
+        $(".message").text("Take your best shot!");
+        $(".lastGuess").text(" - ");
+
+        // Reset colors
+        $(".viewport").animate({backgroundColor: jQuery.Color("rgb(0,0,255)")}, 1000);
+        $(".temp").animate({color: jQuery.Color("rgb(0,0,255)")}, 1000);
+
+        // Show guess elements
+        $("#guessButton, .guess").fadeIn(UIFadeTime);
     }
 
     function updateHeatLevel() { 
@@ -101,7 +110,6 @@ $(document).ready(function() {
                 break;             
         }
         var redness;
-     
         if (diff > 10) {
             redness = 0;
         }
@@ -114,32 +122,34 @@ $(document).ready(function() {
             blueness = 0;
         }
         else if (diff > 30) {
-            blueness = 255 ;
+            blueness = 255;
         }
         else {
             blueness = Math.floor(((diff - 10) * 255) / 20);
         }
+
         //https://github.com/jquery/jquery-color
         var jColor = jQuery.Color ( "rgb(" + redness + " ," + 0 + "," + blueness + ")" );
+        
         //http://stackoverflow.com/questions/2652281/jquery-fade-in-background-colour
-        $(".viewport").animate({backgroundColor: jColor}, 1000);
-        $(".temp").animate({color: jColor}, 1000);
+        $(".viewport").animate({backgroundColor: jColor}, UIFadeTime);
+        $(".temp").animate({color: jColor}, UIFadeTime);
     }
 
     function updateInstruction() {
         if (currentDiff() > lastDiff())
-            $(".instruct").text("You are getting colder.");
+            $(".instructText").text("You are getting colder.");
         else if (currentDiff() < lastDiff())
-            $(".instruct").text("You are getting warmer.");
+            $(".instructText").text("You are getting warmer.");
         else
-            $(".instruct").text("Nope.");
+            $(".instructText").text("Nope.");
 
         $(".message").text("Guess again.");
     }
 
     function validGuess(num) {
         if(isNaN(num) || num < 1 || num > 100) {
-            $(".message").text("Please enter a number between 1 and 100.");
+            $(".message").text("Guess a number between 1 and 100.");
             return false;
         }        
         return true;
