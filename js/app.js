@@ -11,6 +11,7 @@ $(document).ready(function() {
     $("#resetButton").click(resetGame);
     $(".bestScorePkg").hide();
 
+    // Bind enter key to guess button
     $("#guessBox").keypress(function (e) {
      var key = e.which;
      if(key == 13)  // the enter key code
@@ -43,22 +44,27 @@ $(document).ready(function() {
     function endGame() {
         updateScoreboard();
         if(guesses.length === 1)
-        {
-            $(".instructText").text("You win!  On your first guess!?!");
-            $(".message").text("Go buy a lottery ticket!" );
+        {   
+            fadeText(".instructText", "You win!  On your first guess!?!");
+            fadeText(".message", "Go buy a lottery ticket!");
         }
-        $(".instructText").text("You win!  You took " + guesses.length + " guesses.");
-        $(".message").text("Can you do it in " + (guesses.length-1) + "?" );
-
+        else
+        {
+            fadeText(".instructText", "You win!  You took " + guesses.length + " guesses.");
+            fadeText(".message", "Can you do it in " + (guesses.length-1) + "?" );
+        }      
         // Update best score
         if (guesses.length < bestScore) { 
-            bestScore = guesses.length;           
-            $(".bestScore").text(guesses.length);
+            bestScore = guesses.length;    
+            fadeText(".bestScore", guesses.length);
             $(".bestScorePkg").fadeIn(UIFadeTime);
         }
 
         // Hide guess elements
-        $("#guessButton, .guess").fadeOut(UIFadeTime);
+        $("#guessButton, .guess, #resetButton").hide();
+        $("#resetButton").addClass("bigButton");
+        $("#resetButton").removeClass("littleButton");
+        $("#resetButton").fadeIn(UIFadeTime);
     }
 
     function resetGame() {
@@ -71,42 +77,47 @@ $(document).ready(function() {
 
         // Reset all text boxes
         $(".currentScore").text("0");
-        $(".temp").text("Ice Cold");
+        $(".tempText").text("Ice Cold");
         $(".instructText").text("I'm thinking of a number between 1 and 100.");
         $(".message").text("Take your best shot!");
         $(".lastGuess").text(" - ");
 
         // Reset colors
         $(".viewport").animate({backgroundColor: jQuery.Color("rgb(0,0,255)")}, 1000);
-        $(".temp").animate({color: jQuery.Color("rgb(0,0,255)")}, 1000);
+        $(".tempText").animate({color: jQuery.Color("rgb(0,0,255)")}, 1000);
+
+        $("#resetButton").removeClass("bigButton");
+        $("#resetButton").addClass("littleButton");
 
         // Show guess elements
-        $("#guessButton, .guess").fadeIn(UIFadeTime);
+        $("#guessButton").fadeIn(UIFadeTime);
+        $(".guess").show();
+
     }
 
     function updateHeatLevel() { 
         var diff = currentDiff();
         switch (true) { //http://stackoverflow.com/questions/5619832/switch-on-ranges-of-integers-in-javascript
             case (diff === 0):
-                $(".temp").text("On Fire!");
+                fadeText(".tempText", "On Fire!");
                 break;
             case (diff < 3):
-                $(".temp").text("Red Hot");
+                fadeText(".tempText", "Red Hot");
                 break;
             case (diff < 6):
-                $(".temp").text("Toasty");
+                fadeText(".tempText", "Toasty");
                 break;
             case (diff < 11):
-                $(".temp").text("Warm");
+                fadeText(".tempText", "Warm");
                 break;
             case (diff < 21):
-                $(".temp").text("Cool");
+                fadeText(".tempText", "Cool");
                 break;
             case (diff < 31):
-                $(".temp").text("Chilly");
+                fadeText(".tempText", "Chilly");
                 break;   
             default:   
-                $(".temp").text("Ice Cold");
+                fadeText(".tempText", "Ice Cold");
                 break;             
         }
         var redness;
@@ -133,26 +144,37 @@ $(document).ready(function() {
         
         //http://stackoverflow.com/questions/2652281/jquery-fade-in-background-colour
         $(".viewport").animate({backgroundColor: jColor}, UIFadeTime);
-        $(".temp").animate({color: jColor}, UIFadeTime);
+        $(".tempText").animate({color: jColor}, 0);
     }
 
     function updateInstruction() {
-        if (currentDiff() > lastDiff())
-            $(".instructText").text("You are getting colder.");
-        else if (currentDiff() < lastDiff())
-            $(".instructText").text("You are getting warmer.");
-        else
-            $(".instructText").text("Nope.");
+        if (currentDiff() > lastDiff()) {
+            fadeText(".instructText", "You are getting colder.");
+        }
+        else if (currentDiff() < lastDiff()) {
+            fadeText(".instructText", "You are getting warmer.");
+        }
+        else {
+            fadeText(".instructText", "Nope.");
+        }
 
-        $(".message").text("Guess again.");
+        fadeText(".message", "Guess again.");
     }
 
     function validGuess(num) {
         if(isNaN(num) || num < 1 || num > 100) {
-            $(".message").text("Guess a number between 1 and 100.");
+            fadeText(".message", "Guess a number between 1 and 100.");
             return false;
         }        
         return true;
+    }
+
+    function fadeText(selector, textToWrite) {
+        $(selector).fadeOut(Math.floor(UIFadeTime/2), function() {
+            $(selector).text(textToWrite);
+            $(selector).fadeIn(Math.floor(UIFadeTime/2));
+        });
+        
     }
 
     function lastGuess() {
