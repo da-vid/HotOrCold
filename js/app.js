@@ -1,11 +1,9 @@
 $(document).ready(function() {
-
 	var guesses = [];
     var theNumber;
-    var bestScore = 9999;
+    var bestScore = 9999; //initialize to implausibly high number of guesses
     var UIFadeTime = 1000;
-    resetGame();
-   
+
     // Bind button to click event
     $("#guessButton").click(guess);
     $("#resetButton").click(resetGame);
@@ -13,20 +11,24 @@ $(document).ready(function() {
 
     // Bind enter key to guess button
     $("#guessBox").keypress(function (e) {
-     var key = e.which;
-     if(key == 13)  // the enter key code
-      {
-        $("#guessButton").click();
-        return false;  
-      }
+        var key = e.which;
+        if(key == 13) { // the enter key code
+            $("#guessButton").click();
+            return false;  
+        }
     });  
+
+    resetGame();
+
+    /********* Functions *********/
 
     function guess() {
         var num = $("input[name='guess']").val();	
         if(validGuess(num)) {	
             guesses.push(num);
-            if(num == theNumber) 
+            if(num == theNumber) {                
                 endGame();
+            }
             else {
                 updateScoreboard();
                 updateInstruction();
@@ -43,13 +45,11 @@ $(document).ready(function() {
 
     function endGame() {
         updateScoreboard();
-        if(guesses.length === 1)
-        {   
+        if(guesses.length === 1) {   
             fadeText(".instructText", "You win!  On your first guess!?!");
             fadeText(".message", "Go buy a lottery ticket!");
         }
-        else
-        {
+        else {
             fadeText(".instructText", "You win!  You took " + guesses.length + " guesses.");
             fadeText(".message", "Can you do it in " + (guesses.length-1) + "?" );
         }      
@@ -68,7 +68,6 @@ $(document).ready(function() {
     }
 
     function resetGame() {
-
         // Reset the secret number
         theNumber = Math.floor((Math.random()*100)+1);
 
@@ -86,13 +85,12 @@ $(document).ready(function() {
         $(".viewport").animate({backgroundColor: jQuery.Color("rgb(0,0,255)")}, 1000);
         $(".tempText").animate({color: jQuery.Color("rgb(0,0,255)")}, 1000);
 
+        // Make reset button prominent
         $("#resetButton").removeClass("bigButton");
         $("#resetButton").addClass("littleButton");
 
         // Show guess elements
-        $("#guessButton").fadeIn(UIFadeTime);
-        $(".guess").show();
-
+        $("#guessButton, .guess").fadeIn(UIFadeTime);
     }
 
     function updateHeatLevel() { 
@@ -120,23 +118,24 @@ $(document).ready(function() {
                 fadeText(".tempText", "Ice Cold");
                 break;             
         }
+
+        //Calculate background color
         var redness;
         if (diff > 10) {
             redness = 0;
         }
         else {
-            redness = Math.floor((10 - diff) * 255 / 10);
+            redness = Math.floor(((10 - diff) * 200) / 10) + 55;
         }
-
         var blueness;
         if (diff <= 10) {
             blueness = 0;
         }
         else if (diff > 30) {
             blueness = 255;
-        }
+        }        
         else {
-            blueness = Math.floor(((diff - 10) * 255) / 20);
+            blueness = Math.floor(((diff - 10) * 200) / 20) + 55;
         }
 
         //https://github.com/jquery/jquery-color
@@ -174,7 +173,6 @@ $(document).ready(function() {
             $(selector).text(textToWrite);
             $(selector).fadeIn(Math.floor(UIFadeTime/2));
         });
-        
     }
 
     function lastGuess() {
@@ -191,7 +189,4 @@ $(document).ready(function() {
         else
             return Math.abs(theNumber - guesses[guesses.length-2]);
     }
-
-
-
 });
