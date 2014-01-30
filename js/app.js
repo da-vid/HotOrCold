@@ -62,9 +62,11 @@ $(document).ready(function() {
 
         // Hide guess elements
         $("#guessButton, .guess, #resetButton").hide();
-        $("#resetButton").addClass("bigButton");
-        $("#resetButton").removeClass("littleButton");
-        $("#resetButton").fadeIn(UIFadeTime);
+        $("#resetButton").fadeOut(Math.floor(UIFadeTime/2), function() {
+            $("#resetButton").removeClass("littleButton");
+            $("#resetButton").addClass("bigButton");
+            $("#resetButton").fadeIn(Math.floor(UIFadeTime));
+        });
     }
 
     function resetGame() {
@@ -85,7 +87,7 @@ $(document).ready(function() {
         $(".viewport").animate({backgroundColor: jQuery.Color("rgb(0,0,255)")}, 1000);
         $(".tempText").animate({color: jQuery.Color("rgb(0,0,255)")}, 1000);
 
-        // Make reset button prominent
+        // Make reset button little again
         $("#resetButton").removeClass("bigButton");
         $("#resetButton").addClass("littleButton");
 
@@ -95,7 +97,7 @@ $(document).ready(function() {
 
     function updateHeatLevel() { 
         var diff = currentDiff();
-        switch (true) { //http://stackoverflow.com/questions/5619832/switch-on-ranges-of-integers-in-javascript
+        switch (true) { 
             case (diff === 0):
                 fadeText(".tempText", "On Fire!");
                 break;
